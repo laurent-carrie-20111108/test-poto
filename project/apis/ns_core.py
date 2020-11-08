@@ -8,6 +8,7 @@ from flask import current_app as app
 
 api = Namespace('core', description='Eldorado Core BlockChain')
 
+
 @api.route('/health')
 class HealthCheck(Resource):
     def get(self):
@@ -22,7 +23,8 @@ class HealthCheck(Resource):
           503:
             description: Error
         """
-        return {'health': 'ok', 'project':'core'}, 200
+        return {'health': 'ok', 'project': 'core'}, 200
+
 
 @api.route('/db/health')
 class HealthCheckDb(Resource):
@@ -40,20 +42,22 @@ class HealthCheckDb(Resource):
         """
         try:
             connect = CoreConnect()
-            print('HealthCheck CoreConnect',connect.db)
+            print('HealthCheck CoreConnect', connect.db)
             cursor = connect.db.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS txs (
-                  `tid` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                  `rid` varchar(40) NOT NULL,
-                  `sid` varchar(40) NOT NULL,
-                  `amt` varchar(20) NOT NULL,
-                  `status` varchar(40) NOT NULL,
+                  id INT AUTO_INCREMENT PRIMARY KEY,
+                  date datetime ,
+                  tid varchar(40) NOT NULL,
+                  rid int NOT NULL,
+                  sid int NOT NULL,
+                  amt int NOT NULL,
+                  status varchar(40)
                 );
                 """
-            )
-            cursor.execute("SELECT count(*) FROM txs LIMIT 1")
+                           )
+            cursor.execute('SELECT count(*) FROM txs LIMIT 1')
             result = cursor.fetchone()
-            return {'health': 'ok', 'project':'db','total_txs':result}, 200
+            return {'health': 'ok', 'project': 'db', 'total_txs': result}, 200
         except Exception as e:
-            return {'health': 'error', 'msg':'Error: {}'.format(str(e)),'project':'db'}, 503
+            return {'health': 'error', 'msg': 'Error: {}'.format(str(e)), 'project': 'db'}, 503

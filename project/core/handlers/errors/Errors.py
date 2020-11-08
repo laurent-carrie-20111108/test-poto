@@ -5,5 +5,4 @@ class CoreError(object):
 
     def __init__(self, error):
 
-
-        return ;
+        return

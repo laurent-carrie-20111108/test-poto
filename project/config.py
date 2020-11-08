@@ -12,10 +12,10 @@ def load_config(app, config_module):
     try:
         cfg = import_string(config_module)()
         app.config.from_object(cfg)
-        logging.info("Config {} loaded.".format(app.config['ENV_NAME']))
+        logging.info('Config {} loaded.'.format(app.config['ENV_NAME']))
         return True
     except ImportError:
-        logging.debug("Cannot load {}".format(config_module))
+        logging.debug('Cannot load {}'.format(config_module))
         return False
 
 

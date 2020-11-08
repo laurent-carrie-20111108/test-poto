@@ -18,29 +18,24 @@ def create_app(is_test):
     # Create flask app
     app = Flask(__name__)
 
-
-
-
-
-
-
     with app.app_context():
 
         SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
 
-        @app.route("/docs/swagger.json")
+        @app.route('/docs/swagger.json')
         def spec():
             swag = swagger(app)
-            swag['info']['version'] = "1.0"
-            swag['info']['title'] = "Test API Mon Ami Poto"
+            swag['info']['version'] = '1.0'
+            swag['info']['title'] = 'Test API Mon Ami Poto'
             return jsonify(swag)
 
         # Call factory function to create our blueprint
         swaggerui_blueprint = get_swaggerui_blueprint(
-            SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
-            "/docs/swagger.json",
+            # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+            SWAGGER_URL,
+            '/docs/swagger.json',
             config={  # Swagger UI config overrides
-                'app_name': "Test API Mon Ami Poto"
+                'app_name': 'Test API Mon Ami Poto'
             },
             # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
             #    'clientId': "your-client-id",

@@ -15,20 +15,19 @@ class CoreConnect:
     # Initilization Mysql Database
     def init_db(self):
         try:
-            print(app.config["MYSQL_DB"])
-            self.db =  pymysql.connect(
-                host=app.config["MYSQL_DB"]["MYSQL_DATABASE_HOST"],
-                user=app.config["MYSQL_DB"]["MYSQL_DATABASE_USER"],
-                password=app.config["MYSQL_DB"]["MYSQL_DATABASE_PASSWORD"],
-                db=app.config["MYSQL_DB"]["MYSQL_DATABASE_DB"],
+            print(app.config['MYSQL_DB'])
+            self.db = pymysql.connect(
+                host=app.config['MYSQL_DB']['MYSQL_DATABASE_HOST'],
+                user=app.config['MYSQL_DB']['MYSQL_DATABASE_USER'],
+                password=app.config['MYSQL_DB']['MYSQL_DATABASE_PASSWORD'],
+                db=app.config['MYSQL_DB']['MYSQL_DATABASE_DB'],
                 port=3306,
                 cursorclass=pymysql.cursors.DictCursor,
                 client_flag=CLIENT.MULTI_STATEMENTS,
 
             )
 
-
             return self.db
         except pymysql.Error as e:
-            print("ERROR",e)
-            return None;
+            print('ERROR', e)
+            return None

@@ -11,15 +11,15 @@ class Config(object):
 def load_config(app, config_module):
 
     try:
-        print('config_module',config_module)
+        print('config_module', config_module)
 
         cfg = import_string(config_module)()
-        print('config_module',config_module)
+        print('config_module', config_module)
         app.config.from_object(cfg)
-        logging.info("Config {} loaded.".format(app.config['ENV_NAME']))
+        logging.info('Config {} loaded.'.format(app.config['ENV_NAME']))
         return True
     except ImportError:
-        logging.debug("Cannot load {}".format(config_module))
+        logging.debug('Cannot load {}'.format(config_module))
         return False
 
 
@@ -40,7 +40,7 @@ def load_config_test(app):
 
 
 def load_all_configs(app):
-    print("load_all_configs")
+    print('load_all_configs')
     load_config_functions = [load_config_prod,
                              load_config_stage,
                              load_config_dev]
