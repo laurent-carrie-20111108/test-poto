@@ -11,5 +11,5 @@ class TestConfig(Config):
         'MYSQL_DATABASE_PORT': '3306',
         'MYSQL_DATABASE_USER': 'root',
         'MYSQL_DATABASE_PASSWORD': '8bogweFIIeEpuKED',
-        'MYSQL_DATABASE_DB': 'toto',
+        'MYSQL_DATABASE_DB': 'test_20111108',
     }
